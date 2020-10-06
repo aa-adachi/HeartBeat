@@ -15,9 +15,10 @@ var beat = null; //心拍の音を入れる箱
 /* --- ここから変更部分 --- */
 var xmlHttp = new XMLHttpRequest();
 xmlHttp.open("GET", "http://54.248.228.235/index.txt", false);
-xmlHttp.send(null);
+xmlHttp.send('');
 
-const bpms = "[%s]", xmlHttp;  // <-- ?
+var data = xmlHttp.responseText;
+const bpms = (data.slice(0, -1) ).split(',').map( str => parseInt(str, 10) );  // 配列に格納 ( 文字列 --> 数値 )
 
 /*const bpms = [
   70,70,70,70,70,70,70,70,70,70,70,83,70,70,70,70,70,70,70,70,70,70,70,70,70,70,79,79,79,70,
