@@ -12,12 +12,16 @@ var noteLength = 0.05;  //ビープ音の長さ(秒単位)
 var beat = null; //心拍の音を入れる箱
 
 
-/* --- ここから変更部分 --- */
-var xmlHttp = new XMLHttpRequest();
-xmlHttp.open("GET", "http://54.248.228.235/index.txt", false);
-xmlHttp.send('');
+/* ----- 変更部分 ----- */
+//var data = "87,88,";
+var xhr = new XMLHttpRequest(); 
+xhr.open('GET', 'http://54.248.228.235/index.txt', false);
+xhr.responseType = 'text';
+xhr.onload = function() {
+  data = xhr.responseText;
+}
+xhr.send('');
 
-var data = xmlHttp.responseText;
 const bpms = (data.slice(0, -1) ).split(',').map( str => parseInt(str, 10) );  // 配列に格納 ( 文字列 --> 数値 )
 
 /*const bpms = [
@@ -39,7 +43,7 @@ const bpms = (data.slice(0, -1) ).split(',').map( str => parseInt(str, 10) );  /
   88,91,93,96,94,93,93,92,86,85,84,83,83,83,83,84,81,84,85,84,83,83,82,81,81,81,80,80,81,84,85,84,85,85,86,87,89,92,92,91,91,94,95,97,97,
 ];*/
 
-/* --- ここまで変更部分 --- */
+/* ------------------- */
 
 
 var bpm = bpms[0];
